@@ -10,7 +10,6 @@ def laplacian(a: torch.Tensor) -> torch.Tensor:
 
 
 def algebraic_connectivity(a: torch.Tensor) -> float:
-    """Second-smallest eigenvalue of the graph Laplacian."""
     l = laplacian(a)
     evals = torch.linalg.eigvalsh(l)
     if evals.numel() < 2:
@@ -19,7 +18,6 @@ def algebraic_connectivity(a: torch.Tensor) -> float:
 
 
 def dirichlet_energy(x: torch.Tensor, a: torch.Tensor) -> float:
-    """x^T L x averaged per node."""
     l = laplacian(a)
     e = torch.trace(x.T @ l @ x)
     return float((e / max(1, x.shape[0])).item())

@@ -35,7 +35,6 @@ def _node_features(g: nx.Graph, d: int = 16) -> np.ndarray:
 
 
 def generate_spurious_topology(num_samples: int = 256, n: int = 24, d: int = 16) -> List[GraphSample]:
-    """Label is SBM community assignment; extra cycles are spurious."""
     samples: List[GraphSample] = []
     for _ in range(num_samples):
         label = int(np.random.randint(0, 2))
@@ -44,7 +43,6 @@ def generate_spurious_topology(num_samples: int = 256, n: int = 24, d: int = 16)
         sizes = [n // 2, n - n // 2]
         probs = [[p_in, p_out], [p_out, p_in]]
         g = nx.stochastic_block_model(sizes, probs, seed=int(np.random.randint(1_000_000)))
-        # inject extra cycles that should not be predictive
         if np.random.rand() < 0.5:
             for i in range(0, n - 2, 3):
                 g.add_edge(i, i + 2)
@@ -53,7 +51,6 @@ def generate_spurious_topology(num_samples: int = 256, n: int = 24, d: int = 16)
 
 
 def generate_homology_task(num_samples: int = 256, n: int = 24, d: int = 16) -> List[GraphSample]:
-    """Label depends on cycle richness / Betti-1 proxy."""
     samples: List[GraphSample] = []
     for _ in range(num_samples):
         p = float(np.random.uniform(0.06, 0.16))
@@ -68,7 +65,6 @@ def generate_homology_task(num_samples: int = 256, n: int = 24, d: int = 16) -> 
 
 
 def generate_anti_topology(num_samples: int = 256, n: int = 24, d: int = 16) -> List[GraphSample]:
-    """Label depends on long-range node feature signal, not topology."""
     samples: List[GraphSample] = []
     for _ in range(num_samples):
         g = nx.random_tree(n, seed=int(np.random.randint(1_000_000)))

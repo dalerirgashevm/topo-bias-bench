@@ -9,7 +9,6 @@ import torch
 
 from .config import Config
 from .data import generate_anti_topology, generate_homology_task, generate_spurious_topology, train_test_split
-from .eval import accuracy
 from .metrics import accuracy as metric_accuracy
 from .models import GAT, GCN, GraphTransformer, TopoMPNN
 from .rewire import rewired_sample

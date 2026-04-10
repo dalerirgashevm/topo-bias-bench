@@ -5,3 +5,4 @@ feature_dim: 16
 train_ratio: 0.8
 epochs: 20
 lr: 0.001
+rewires: 8

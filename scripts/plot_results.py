@@ -12,8 +12,9 @@ def main(results_path: str = "results/results.json") -> None:
         raise FileNotFoundError(f"Missing results file: {path}")
 
     results = json.loads(path.read_text())
-    tasks = list(results.keys())
-    models = sorted(next(iter(results.values())).keys())
+    summary = results.get("summary", results)
+    tasks = list(summary.keys())
+    models = sorted(next(iter(summary.values())).keys())
 
     fig, ax = plt.subplots(figsize=(10, 5))
     x = range(len(tasks))
@@ -21,7 +22,7 @@ def main(results_path: str = "results/results.json") -> None:
     offsets = [(-1.5 + i) * width for i in range(len(models))]
 
     for i, model in enumerate(models):
-        vals = [results[t][model] for t in tasks]
+        vals = [summary[t][model]["test_acc_mean"] if "test_acc_mean" in summary[t][model] else summary[t][model].get("test_acc", 0.0) for t in tasks]
         ax.bar([xi + offsets[i] for xi in x], vals, width=width, label=model)
 
     ax.set_xticks(list(x))
