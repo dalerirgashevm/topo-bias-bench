@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it."
+title: "topo-bias-bench"
+version: "0.1.0"
+authors:
+  - family-names: Irgashev
+    given-names: Daler
+repository-code: "https://github.com/dalerirgashevm/topo-bias-bench"
+license: MIT
+abstract: >-
+  Benchmarking topological inductive bias in graph learning under controlled OOD conditions.
+keywords:
+  - graph neural networks
+  - topology
+  - inductive bias
+  - out-of-distribution generalization
