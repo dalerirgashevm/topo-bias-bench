@@ -1,0 +1,7 @@
+seed: 0
+num_samples: 256
+num_nodes: 24
+feature_dim: 16
+train_ratio: 0.8
+epochs: 20
+lr: 0.001
